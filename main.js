@@ -2,6 +2,11 @@ var count = -1              // global count variable
 var seconds_in_hour = 3600; // number of seconds in hour    
 var intervalListener = null;// 
 
+// used to parse time
+var _minute = 60;
+var _hour = _minute * 60;
+var _day = _hour * 24;
+
 // returns date (in milliseconds) from string
 function getTimestamp(str) {
     var d = str.match(/\d+/g);                          // extract date parts
@@ -10,7 +15,9 @@ function getTimestamp(str) {
 
 // function that counts down global variable count
 function timer() {
+
     count=count-1;
+
     if (count <= 0) {          
         document.getElementById("can_eat").innerHTML="Can I eat?  -> YES!"; 
         document.getElementById("countdown").innerHTML="Go to buffet NOW!"; 
@@ -18,9 +25,22 @@ function timer() {
         window.clearInterval(intervalListener);
         return;
     }
-    
+
+    var days = Math.floor(count / _day);
+    if (days == 0) days = "";
+    else days = days + " days";
+    var hours = Math.floor((count % _day) / _hour);
+    if (hours == 0) days = "";
+    else hours = hours + " hours";
+    var minutes = Math.floor((count % _hour) / _minute);
+    if (minutes == 0) days = "";
+    else minutes = minutes + " minutes";
+    var seconds = (count % _minute);
+    if (seconds == 0) days = "";
+    else seconds = seconds + " seconds";
+
     document.getElementById("can_eat").innerHTML="Can I eat?  -> NO!"; 
-    document.getElementById("countdown").innerHTML="Countdown: " + count + " secs"; 
+    document.getElementById("countdown").innerHTML="Countdown: " + days + " " + hours + " " + minutes + " " + seconds; 
 };
 
 // starts countdown
@@ -53,7 +73,7 @@ $(document).ready(function () {
     // check if buffet_target is already set. If so, count down!
     var start = localStorage.getItem("buffet_target");
     console.log(start);
-    if (start !== null && Math.floor((start - new Date())/1000) > 0) {
+    if (start !== null && (start - new Date()) > 0) {
         startTimer(Math.floor((start - new Date())/1000));
     }
     // else, show form
