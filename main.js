@@ -46,23 +46,6 @@ function startTimer(countdown){
     intervalListener=setInterval(timer,1000);
 };
 
-// for datepicker
-$(function () {
-    var dates = $("#buffet_date").datepicker({
-        defaultDate: "+1w",
-        changeMonth: true,
-        onSelect: function (selectedDate) {
-            var option = this.id == "from" ? "minDate" : "maxDate",
-        instance = $(this).data("datepicker"),
-        date = $.datepicker.parseDate(
-            instance.settings.dateFormat ||
-            $.datepicker._defaults.dateFormat,
-            selectedDate, instance.settings);
-            dates.not(this).datepicker("option", option, date);
-        }
-    });
-});
-
 $(document).ready(function () {  
     $("#status").addClass("hidden");
     $("#buffet_form").addClass("hidden");
@@ -83,15 +66,14 @@ $(document).ready(function () {
             var allVariables = document.getElementById("buffet_form").getElementsByClassName("attr");
             
             var name = allVariables['buffet_name'].value;
-            var date = allVariables['buffet_date'].value;
-            var time = allVariables['buffet_time'].value;
+            var datetime = Date.parse(allVariables['buffet_date'].value);
             
-            var start = getTimestamp(date + " " + time);
+            //var start = getTimestamp(date + " " + time);
             
-            localStorage.setItem("buffet_target", start);
+            localStorage.setItem("buffet_target", datetime);
             localStorage.setItem("buffet_name", name);
             
-            var countdown= Math.floor((start - new Date())/1000);
+            var countdown= Math.floor((datetime - new Date())/1000);
             startTimer(countdown);
         };
 
