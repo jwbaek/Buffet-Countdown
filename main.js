@@ -73,7 +73,7 @@ $(document).ready(function () {
     // check if buffet_target is already set. If so, count down!
     var start = localStorage.getItem("buffet_target");
     console.log(start);
-    if (start !== null && (start - new Date()) > 0) {
+    if (start !== null && (parseInt(start) - new Date()) > 0) {
         startTimer(Math.floor((start - new Date())/1000));
     }
     // else, show form
@@ -90,7 +90,7 @@ $(document).ready(function () {
             
             //var start = getTimestamp(date + " " + time);
             
-            localStorage.setItem("buffet_target", datetime);
+            localStorage.setItem("buffet_target", datetime.valueOf());
             localStorage.setItem("buffet_name", name);
             
             var countdown= Math.floor((datetime - new Date())/1000);
