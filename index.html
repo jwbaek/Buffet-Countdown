@@ -11,17 +11,24 @@
 	<link rel="stylesheet" type="text/css" href="base.css" media="screen" />
 </head>
 
+<div class="content">
+	<h1 id="title">Pre-Buffet Fasting Counter</h1>
 
-<h1 id="title">Pre-Buffet Fasting Counter</h1>
+	<div id="status">
+	    <p id="can_eat"></p>
+	    <p id="countdown"></p>
+	    <button type="button" id="reset_button">New Buffet</button>
+	</div>
 
-<div id="status">
-    <p id="can_eat"></p>
-    <p id="countdown"></p>
-    <button type="button" id="reset_button">New Buffet</button>
+	<form id="buffet_form">
+		<div data-role="fieldcontain">
+			<label for="buffet_name">Name</label>
+		    <input class="attr" type="text" id="buffet_name" placeholder="Buffet Name"></input>
+		</div>
+		<div data-role="fieldcontain">
+		    <label for="buffet_date">Time and Date</label>
+		    <input class="attr" type="text" id="buffet_date" placeholder="Date"></input>
+		    <button type="button" id="submit_button">Submit</button>
+		</div>
+	</form>
 </div>
-
-<form id="buffet_form">
-    <input class="attr" type="text" id="buffet_name" placeholder="Buffet Name"></input>
-    <input class="attr" type="text" id="buffet_date" placeholder="Date"></input>
-    <button type="button" id="submit_button">Submit</button>
-</form>
