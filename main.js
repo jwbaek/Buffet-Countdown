@@ -1,5 +1,4 @@
-var count = -1              // global count variable 
-var seconds_in_hour = 3600; // number of seconds in hour    
+var count = -1              // global count variable  
 var intervalListener = null;
 
 // used to parse time
@@ -43,10 +42,6 @@ function timer() {
     $("#can_eat").css('color', 'red'); 
     document.getElementById("countdown").innerHTML="Countdown: " + days + hours + minutes + seconds; 
 };
-
-function printCountDown(count){
-    var days, months
-}
 
 // starts countdown
 function startTimer(countdown){
