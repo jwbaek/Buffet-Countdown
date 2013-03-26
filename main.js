@@ -1,6 +1,6 @@
 var count = -1              // global count variable 
 var seconds_in_hour = 3600; // number of seconds in hour    
-var intervalListener = null;// 
+var intervalListener = null;
 
 // returns date (in milliseconds) from string
 function getTimestamp(str) {
@@ -11,17 +11,24 @@ function getTimestamp(str) {
 // function that counts down global variable count
 function timer() {
     count=count-1;
+    var buffet_name = localStorage.getItem("buffet_name");
     if (count <= 0) {          
-        document.getElementById("can_eat").innerHTML="Can I eat?  -> YES!"; 
-        document.getElementById("countdown").innerHTML="Go to buffet NOW!"; 
+        document.getElementById("can_eat").innerHTML="YES!";
+        $("#can_eat").css('color', 'green'); 
+        document.getElementById("countdown").innerHTML="Go to " + buffet_name + " NOW!"; 
         console.log("Clearing interval");
         window.clearInterval(intervalListener);
         return;
     }
     
-    document.getElementById("can_eat").innerHTML="Can I eat?  -> NO!"; 
-    document.getElementById("countdown").innerHTML="Countdown: " + count + " secs"; 
+    document.getElementById("can_eat").innerHTML="NO!"; 
+    $("#can_eat").css('color', 'red'); 
+    document.getElementById("countdown").innerHTML= buffet_name + " in " + count + " secs"; 
 };
+
+function printCountDown(count){
+    var days, months
+}
 
 // starts countdown
 function startTimer(countdown){

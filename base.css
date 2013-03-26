@@ -5,3 +5,17 @@
 .hidden {
     display:None;
 }
+
+#can_eat{
+	font-size:100px;
+	font-weight:bold;
+	margin-top:10px;
+	margin-bottom:10px;
+}
+
+#eat_question{
+	font-size:30px;
+	font-weight:bold;
+	margin-top:10px;
+	margin-bottom:10px;
+}
