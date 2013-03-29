@@ -87,6 +87,9 @@ $(document).ready(function () {
             
             var name = allVariables['buffet_name'].value;
             var datetime = Date.parse(allVariables['buffet_date'].value);
+
+            allVariables['buffet_name'].value = ""
+            allVariables['buffet_date'].value = ""
             
             localStorage.setItem("buffet_target", datetime.valueOf());
             localStorage.setItem("buffet_name", name);
