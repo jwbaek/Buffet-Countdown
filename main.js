@@ -13,11 +13,11 @@ function getTimestamp(str) {
 }
 
 // function that counts down global variable count
-function timer() {
+function timer(buffet_name) {
 
     count=count-1;
-    var buffet_name = localStorage.getItem("buffet_name");
 
+    document.getElementById("header").innerHTML="Countdown for " + buffet_name; 
     if (count <= 0) {          
         displayYes();
         document.getElementById("countdown").innerHTML="Go to " + buffet_name + " NOW!"; 
@@ -63,7 +63,7 @@ function displayCountDown(count) {
 }
 
 // starts countdown
-function startTimer(countdown){
+function startTimer(countdown, name){
 
     var reset_button = document.getElementById("reset_button");   
     // clears current data and shows form
@@ -80,9 +80,9 @@ function startTimer(countdown){
 
     $("#status").removeClass("hidden");
     count = countdown;
-    timer();
+    timer(name);
     // calls timer every second
-    intervalListener=setInterval(timer,1000);
+    intervalListener=setInterval(function() {timer(name);},1000);
 };
 
 $(document).ready(function () {  
@@ -91,6 +91,7 @@ $(document).ready(function () {
 
     // check if buffet_target is already set. If so, count down!
     var start = localStorage.getItem("buffet_target");
+    var name = localStorage.getItem("buffet_name");
     console.log(start);
     if (start !== null && (parseInt(start) - new Date()) > 0) {
         startTimer(Math.floor((start - new Date())/1000));
@@ -115,7 +116,7 @@ $(document).ready(function () {
             localStorage.setItem("buffet_name", name);
             
             var countdown= Math.floor((datetime - new Date())/1000);
-            startTimer(countdown);
+            startTimer(countdown, name);
         };
 
     };
