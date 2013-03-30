@@ -19,13 +19,27 @@ function timer() {
     var buffet_name = localStorage.getItem("buffet_name");
 
     if (count <= 0) {          
-        document.getElementById("can_eat").innerHTML="YES!";
-        $("#can_eat").css('color', 'green'); 
+        displayYes();
         document.getElementById("countdown").innerHTML="Go to " + buffet_name + " NOW!"; 
         console.log("Clearing interval");
         window.clearInterval(intervalListener);
         return;
     }
+
+    displayCountDown(count);
+};
+
+function displayYes() {
+    document.getElementById("can_eat").innerHTML="YES!";
+    $("#can_eat").css('color', 'green'); 
+}
+
+function displayNo() {
+    document.getElementById("can_eat").innerHTML="NO!"; 
+    $("#can_eat").css('color', 'red'); 
+}
+
+function displayCountDown(count) {
 
     var days = Math.floor(count / _day);
     if (days == 0) days = "";
@@ -38,10 +52,15 @@ function timer() {
     else minutes = minutes + " minutes ";
     var seconds = (count % _minute) + " seconds "; // show seconds even if 0
 
-    document.getElementById("can_eat").innerHTML="NO!"; 
-    $("#can_eat").css('color', 'red'); 
-    document.getElementById("countdown").innerHTML="Countdown: " + days + hours + minutes + seconds; 
-};
+    if (Math.floor(count / _day) > 0) {
+        if (Math.floor(count / _day) == 1) days = ""
+        displayYes();
+        document.getElementById("countdown").innerHTML="Fasting starts in: " + days + hours + minutes + seconds; 
+    } else {
+        displayNo();
+        document.getElementById("countdown").innerHTML="Fasting ends in: " + days + hours + minutes + seconds;
+    }
+}
 
 // starts countdown
 function startTimer(countdown){
@@ -81,6 +100,7 @@ $(document).ready(function () {
         $("#buffet_form").removeClass("hidden");
         var submit_button = document.getElementById("submit_button");
         submit_button.onclick = function() {
+
             $("#buffet_form").addClass("hidden");
             $("#status").removeClass("hidden");
             var allVariables = document.getElementById("buffet_form").getElementsByClassName("attr");
