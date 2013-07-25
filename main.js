@@ -94,7 +94,7 @@ $(document).ready(function () {
     var name = localStorage.getItem("buffet_name");
     console.log(start);
     if (start !== null && (parseInt(start) - new Date()) > 0) {
-        startTimer(Math.floor((start - new Date())/1000));
+        startTimer(Math.floor((start - new Date())/1000), name);
     }
     // else, show form
     else{
